@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="Loader" style="align-items: center; justify-content: center; width: 100%; height: 100%; display: flex; background-color: rgb(20, 21, 23);">
+        <ui:VisualElement name="CanIcon" style="background-image: url(&apos;project://database/Assets/UI/Icons/Spraycan.png?fileID=2800000&amp;guid=07e6e697811e2fc4eb2cb1782e3f3dfb&amp;type=3#Spraycan&apos;); height: 25%; -unity-background-scale-mode: scale-to-fit; rotate: 0; transform-origin: left 65%; width: 25%; max-width: 64px; max-height: 110px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.9);" />
+    </ui:VisualElement>
+</ui:UXML>

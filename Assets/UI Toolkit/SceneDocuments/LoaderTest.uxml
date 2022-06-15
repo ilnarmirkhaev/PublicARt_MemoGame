@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="LoaderTemplate" src="project://database/Assets/UI%20Toolkit/SceneDocuments/LoaderTemplate.uxml?fileID=9197481963319205126&amp;guid=0d1b2675ce50c704ab3a0b524ab39be9&amp;type=3#LoaderTemplate" />
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/Loader.uss?fileID=7433441132597879392&amp;guid=a531d5b90de9edf46b7a78e7ef307ee0&amp;type=3#Loader" />
+    <Core.SafeAreaManager>
+        <ui:VisualElement name="LoadingScreen" style="position: absolute; width: 100%; height: 100%; background-color: rgb(20, 21, 23); display: flex; align-items: center; justify-content: flex-start; padding-left: 16px; padding-right: 16px;">
+            <ui:VisualElement name="DownloadRequest" style="align-items: center; justify-content: center; width: 100%; height: 100%; display: flex;">
+                <ui:Label text="Требуется загрузить 0 МБ" display-tooltip-when-elided="true" name="DownloadSize" style="height: auto; color: rgb(255, 255, 255); font-size: 20px; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-font-definition: url(&apos;project://database/Assets/Fonts/Golos-UI/Golos-UI_Bold%20SDF.asset?fileID=11400000&amp;guid=7e6740d973c978049ba92667a8c725b0&amp;type=2#Golos-UI_Bold SDF&apos;); -unity-font: url(&apos;project://database/Assets/Fonts/Golos-UI/Golos-UI_Bold.ttf?fileID=12800000&amp;guid=69e182e244877874b8a9a0c96ba6823f&amp;type=3#Golos-UI_Bold&apos;); -unity-text-align: middle-center;" />
+                <ui:Button text="Загрузить" display-tooltip-when-elided="true" name="DownloadButton" style="margin-top: 50px; width: 100%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ScalingBox" style="display: flex; width: 100%; height: 100%;">
+                <ui:Instance template="LoaderTemplate" name="LoaderTemplate" style="width: 100%; height: 100%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </Core.SafeAreaManager>
+</ui:UXML>

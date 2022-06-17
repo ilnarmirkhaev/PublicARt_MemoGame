@@ -1,0 +1,44 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/AudioPlayer.uss?fileID=7433441132597879392&amp;guid=23c1e3916acc40e49acf7b12c9acda04&amp;type=3#AudioPlayer" />
+    <Core.SafeAreaManager>
+        <ui:VisualElement name="LoadingScreen" style="position: absolute; width: 100%; height: 100%; background-color: rgb(20, 21, 23); display: flex; align-items: center; justify-content: flex-start; padding-left: 16px; padding-right: 16px; padding-top: 16px;">
+            <ui:VisualElement name="DownloadRequest" style="align-items: center; width: 100%; height: 100%; display: flex;">
+                <ui:Label text="Требуется загрузить 0 МБ" display-tooltip-when-elided="true" style="height: auto; color: rgb(255, 255, 255); font-size: 20px; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 24px; -unity-font-definition: url(&apos;project://database/Assets/Fonts/Golos-UI/Golos-UI_Bold%20SDF.asset?fileID=11400000&amp;guid=7e6740d973c978049ba92667a8c725b0&amp;type=2#Golos-UI_Bold SDF&apos;); -unity-font: url(&apos;project://database/Assets/Fonts/Golos-UI/Golos-UI_Bold.ttf?fileID=12800000&amp;guid=69e182e244877874b8a9a0c96ba6823f&amp;type=3#Golos-UI_Bold&apos;); -unity-text-align: middle-center;" />
+                <ui:VisualElement name="Panel1" style="margin-top: 30px; margin-bottom: 30px;">
+                    <ui:VisualElement name="AudioPlayer" class="audio-player">
+                        <ui:VisualElement style="width: 100%; flex-direction: row; justify-content: flex-end;">
+                            <ui:Button display-tooltip-when-elided="true" name="CloseButton" class="close-button" />
+                        </ui:VisualElement>
+                        <ui:Button display-tooltip-when-elided="true" name="PlayButton" class="circle-container" style="display: flex;">
+                            <ui:VisualElement name="Icon" style="min-width: 24px; min-height: 24px; max-width: 36px; max-height: 36px; -unity-background-scale-mode: scale-to-fit;" />
+                        </ui:Button>
+                        <ui:Slider picking-mode="Ignore" value="25" high-value="100" class="audio-slider">
+                            <ui:VisualElement name="TimeStamps" style="flex-direction: row; justify-content: space-between; display: flex; align-items: center; margin-top: 6px;">
+                                <ui:Label text="0:49" display-tooltip-when-elided="true" class="timestamp-label" />
+                                <ui:Label text="2:31" display-tooltip-when-elided="true" class="timestamp-label" />
+                            </ui:VisualElement>
+                        </ui:Slider>
+                    </ui:VisualElement>
+                    <ui:Button text="Загрузить" display-tooltip-when-elided="true" name="DownloadButton" style="width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Panel2">
+                    <ui:VisualElement name="AudioPlayer" class="audio-player">
+                        <ui:VisualElement style="width: 100%; flex-direction: row; justify-content: flex-end;">
+                            <ui:Button display-tooltip-when-elided="true" name="CloseButton" class="close-button" />
+                        </ui:VisualElement>
+                        <ui:Button display-tooltip-when-elided="true" name="PlayButton" class="circle-container" style="display: flex;">
+                            <ui:VisualElement name="Icon" style="min-width: 24px; min-height: 24px; max-width: 36px; max-height: 36px; -unity-background-scale-mode: scale-to-fit;" />
+                        </ui:Button>
+                        <ui:Slider picking-mode="Ignore" value="25" high-value="100" class="audio-slider">
+                            <ui:VisualElement name="TimeStamps" style="flex-direction: row; justify-content: space-between; display: flex; align-items: center; margin-top: 6px;">
+                                <ui:Label text="0:49" display-tooltip-when-elided="true" class="timestamp-label" />
+                                <ui:Label text="2:31" display-tooltip-when-elided="true" class="timestamp-label" />
+                            </ui:VisualElement>
+                        </ui:Slider>
+                    </ui:VisualElement>
+                    <ui:Button text="Загрузить" display-tooltip-when-elided="true" name="DownloadButton" style="width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </Core.SafeAreaManager>
+</ui:UXML>

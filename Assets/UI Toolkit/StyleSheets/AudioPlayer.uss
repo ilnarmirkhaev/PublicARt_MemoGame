@@ -1,0 +1,250 @@
+.audio-player {
+    width: 375px;
+    height: 196px;
+    background-color: rgb(33, 36, 42);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.audio-slider {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 29px;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+
+.timestamp-label {
+    -unity-font: url('project://database/Assets/Fonts/Golos-UI/Golos-UI_Regular.ttf?fileID=12800000&guid=47bf20260ef46db4d8c7967683a1764f&type=3#Golos-UI_Regular');
+    -unity-font-definition: url('project://database/Assets/Fonts/Golos-UI/Golos-UI_Regular%20SDF.asset?fileID=11400000&guid=b30bd5ca325f0984aae3a66e402407ef&type=2#Golos-UI_Regular SDF');
+    color: rgb(255, 255, 255);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 13px;
+}
+
+.audio-slider .unity-base-slider__dragger {
+    background-color: rgb(19, 172, 196);
+    width: 8px;
+    height: 8px;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: -3px;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.audio-slider .unity-base-slider__tracker {
+    height: 2px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: rgb(207, 207, 207);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 100%;
+}
+
+.audio-slider .unity-base-slider__drag-container {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    justify-content: center;
+}
+
+.close-button {
+    background-image: url('project://database/Assets/UI/Buttons/Cross.png?fileID=2800000&guid=aafad34adc3225b499e20ed84bf4ff97&type=3#Cross');
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 18px;
+    height: 18px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.58);
+}
+
+.close-button:active {
+    background-image: url('project://database/Assets/UI/Buttons/Cross.png?fileID=2800000&guid=aafad34adc3225b499e20ed84bf4ff97&type=3#Cross');
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 18px;
+    height: 18px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.3);
+}
+
+.circle-container {
+    width: 56px;
+    height: 56px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    min-height: 56px;
+}
+
+.circle-container:active {
+    width: 56px;
+    height: 56px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-loading {
+    background-image: url('project://database/Assets/UI/Icons/Icon_Loading.png?fileID=2800000&guid=ef393aad64507cf41b05984742d8be3d&type=3#Icon_Loading');
+    width: 36px;
+    height: 36px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.icon-play {
+    background-image: url('project://database/Assets/UI/Icons/Icon_Play.png?fileID=2800000&guid=70ec0c091775ac242bc7f226d00ca737&type=3#Icon_Play');
+    width: 24px;
+    height: 24px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.icon-pause {
+    background-image: url('project://database/Assets/UI/Icons/Icon_Pause.png?fileID=2800000&guid=c15f21d3867b5d1438903fae1d5ecf8d&type=3#Icon_Pause');
+    width: 24px;
+    height: 24px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}

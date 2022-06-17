@@ -1,7 +1,4 @@
-﻿using System;
-using Core;
-using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace LoaderTemplate

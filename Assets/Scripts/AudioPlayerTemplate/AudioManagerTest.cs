@@ -5,6 +5,7 @@ namespace AudioPlayerTemplate
     public class AudioManagerTest : MonoBehaviour
     {
         private AudioSource _source;
+        private AudioPlayer _current;
 
         private void Awake()
         {
@@ -23,20 +24,23 @@ namespace AudioPlayerTemplate
             AudioPlayer.OnAudioPause -= PauseAudio;
         }
 
-        private void PlayAudio(AudioClip audioClip)
+        private void PlayAudio(AudioPlayer audioPlayer)
         {
-            if (_source.clip != audioClip)
+            _current = audioPlayer;
+            
+            if (_source.clip != _current.AudioClip)
             {
-                _source.clip = audioClip;
+                _source.clip = _current.AudioClip;
                 _source.time = 0;
             }
             
             _source.Play();
         }
 
-        private void PauseAudio(AudioClip obj)
+        private void PauseAudio(AudioPlayer audioPlayer)
         {
-            _source.Stop();
+            if (_current == audioPlayer)
+                _source.Pause();
         }
     }
 }

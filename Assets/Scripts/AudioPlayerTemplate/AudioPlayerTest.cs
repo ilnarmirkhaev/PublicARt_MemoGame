@@ -44,11 +44,9 @@ namespace AudioPlayerTemplate
         private IEnumerator Start()
         {
             yield return new WaitForSeconds(5);
-            _audioPlayer1.OnAudioLoaded();
             _audioPlayer1.SetAudioClip(clip1);
             
             yield return new WaitForSeconds(5);
-            _audioPlayer2.OnAudioLoaded();
             _audioPlayer2.SetAudioClip(clip2);
         }
 

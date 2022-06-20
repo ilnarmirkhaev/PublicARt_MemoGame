@@ -56,5 +56,10 @@ namespace Views
         {
             button.text = text;
         }
+        
+        public static void Check(VisualElement element)
+        {
+            if (element == null) Debug.LogWarning($"{nameof(element)} is missing");
+        }
     }
 }

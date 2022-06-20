@@ -3,6 +3,7 @@ using Core;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Views;
 
 namespace AudioPlayerTemplate
 {
@@ -34,12 +35,12 @@ namespace AudioPlayerTemplate
                 if (_state == AudioPlayerState.LOADING)
                 {
                     _playButton.SetEnabled(false);
-                    _tweener = AnimateUI.AnimateRotation(_buttonIcon, 360, LoopType.Incremental, Ease.Linear);
+                    _tween = AnimateUI.AnimateRotation(_buttonIcon, 360, LoopType.Incremental, Ease.Linear);
                 }
                 else
                 {
                     _playButton.SetEnabled(true);
-                    _tweener?.Kill();
+                    _tween?.Kill();
 
                     if (_state == AudioPlayerState.PLAYING)
                     {
@@ -69,23 +70,25 @@ namespace AudioPlayerTemplate
         private const int Padding = 16;
 
         // Events
-        public static event Action OnAudioPlayerOpened;
-        public static event Action OnAudioPlayerClosed;
 
-        public static event Action<AudioClip> OnAudioPlay;
-        public static event Action<AudioClip> OnAudioPause;
+        public static event Action<AudioPlayer> OnAudioPlay;
+        public static event Action<AudioPlayer> OnAudioPause;
 
         // Misc
-        private Tweener _tweener;
+        private Tweener _tween;
 
-        private AudioClip _audioClip;
+        public AudioClip AudioClip;
         private bool _clipIsDownloaded;
 
+        // UI
         public AudioPlayer(VisualElement audioPlayerView, VisualElement visualElementToClose)
         {
             _audioPlayerView = audioPlayerView;
+            View.Check(_audioPlayerView);
+            
             _elementToClose = visualElementToClose;
-
+            View.Check(_elementToClose);
+            
             // UI Elements
             InitUIElements();
             
@@ -96,9 +99,8 @@ namespace AudioPlayerTemplate
             SetAudioPlayerElementsDisplay(DisplayStyle.None);
 
             // Event listeners
-            _closeButton.clicked += Close;
-            _playButton.clicked += ChangePlayState;
-
+            InitEventListeners();
+            
             State = AudioPlayerState.NONE;
         }
 
@@ -109,15 +111,27 @@ namespace AudioPlayerTemplate
             _audioSlider = _audioPlayerView.Q<Slider>();
 
             _buttonIcon = _playButton.Q<VisualElement>("Icon");
+            
+            View.Check(_closeButton);
+            View.Check(_playButton);
+            View.Check(_audioSlider);
+            View.Check(_buttonIcon);
+        }
+
+        private void InitEventListeners()
+        {
+            _closeButton.clicked += Close;
+            _playButton.clicked += ChangePlayState;
+            OnAudioPlay += (player) =>
+            {
+                if (player != this && State != AudioPlayerState.LOADING)
+                {
+                    State = AudioPlayerState.PAUSED;
+                }
+            };
         }
 
         // Logic
-        public void OnAudioLoaded()
-        {
-            State = AudioPlayerState.PLAYING;
-            _clipIsDownloaded = true;
-        }
-
         private void ChangePlayState()
         {
             if (State == AudioPlayerState.PLAYING)
@@ -128,42 +142,48 @@ namespace AudioPlayerTemplate
         
         public async void Open()
         {
-            State = _clipIsDownloaded ? AudioPlayerState.PLAYING : AudioPlayerState.LOADING;
-            
-            OnAudioPlayerOpened?.Invoke();
             _elementToClose.style.display = DisplayStyle.None;
             _audioPlayerView.style.display = DisplayStyle.Flex;
 
             await AnimateUI.AnimateHeight(_audioPlayerView, 0, 196, 0.5f, 1);
-            SetPadding(Padding);
             
+            State = _clipIsDownloaded ? AudioPlayerState.PLAYING : AudioPlayerState.LOADING;
+            
+            SetPadding(Padding);
             SetAudioPlayerElementsDisplay(DisplayStyle.Flex);
         }
 
         private async void Close()
         {
-            State = _clipIsDownloaded ? AudioPlayerState.PAUSED : AudioPlayerState.LOADING;
-            
             SetAudioPlayerElementsDisplay(DisplayStyle.None);
-
             SetPadding(0);
+            
+            State = _clipIsDownloaded ? AudioPlayerState.PAUSED : AudioPlayerState.LOADING;
+
             await AnimateUI.AnimateHeight(_audioPlayerView, 196, 0, 0.5f, 1);
 
             _audioPlayerView.style.display = DisplayStyle.None;
             _elementToClose.style.display = DisplayStyle.Flex;
-            OnAudioPlayerClosed?.Invoke();
         }
 
-        public void SetAudioClip(AudioClip audioClip) => _audioClip = audioClip;
+        public void SetAudioClip(AudioClip audioClip)
+        {
+            Debug.Log($"AudioClip {audioClip.name} is set!");
+            _clipIsDownloaded = true;
+            AudioClip = audioClip;
+            
+            if (_audioPlayerView.style.display == DisplayStyle.Flex)
+                State = AudioPlayerState.PLAYING;
+        }
 
         private void Play()
         {
-            OnAudioPlay?.Invoke(_audioClip);
+            OnAudioPlay?.Invoke(this);
         }
 
         private void Pause()
         {
-            OnAudioPause?.Invoke(_audioClip);
+            OnAudioPause?.Invoke(this);
         }
         
         // Styling methods
@@ -188,11 +208,6 @@ namespace AudioPlayerTemplate
             _closeButton.style.display = displayStyle;
             _playButton.style.display = displayStyle;
             _audioSlider.style.display = displayStyle;
-        }
-
-        private void Check(VisualElement element)
-        {
-            if (element == null) Debug.Log("хуй");
         }
     }
 }

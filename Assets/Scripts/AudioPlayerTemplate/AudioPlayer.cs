@@ -169,13 +169,11 @@ namespace AudioPlayerTemplate
             _dragContainer.RegisterCallback<PointerMoveEvent>(_ =>
             {
                 OnSliderDragStarted?.Invoke(this);
-                Debug.Log("Drag started");
             });
             
             _dragContainer.RegisterCallback<PointerUpEvent>(_ =>
             {
                 OnSliderDragEnded?.Invoke(this);
-                Debug.Log("Drag ended");
             });
         }
 
@@ -246,7 +244,7 @@ namespace AudioPlayerTemplate
 
         public void Restart()
         {
-            _audioSlider.value = 0;
+            SetSliderValue(0);
             State = AudioPlayerState.PAUSED;
         }
         

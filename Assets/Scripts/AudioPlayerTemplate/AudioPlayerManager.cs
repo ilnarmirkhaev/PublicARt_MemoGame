@@ -37,9 +37,12 @@ namespace AudioPlayerTemplate
             
             if (_source.isPlaying)
                 _currentPlayer.SetSliderValue(_source.time);
-            
+
             if (_source.time >= _source.clip.length && !_source.isPlaying)
+            {
                 _currentPlayer.Restart();
+                _source.time = 0;
+            }
         }
 
         private void PlayAudio(AudioPlayer audioPlayer)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -54,8 +55,17 @@ namespace AudioPlayerTemplate
 
         private void Update()
         {
+            // Escape to reload scene
             if (Input.GetKeyDown(KeyCode.Escape))
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
+            // Right Mouse Button to swap clips
+            if (Input.GetMouseButtonDown(1))
+            {
+                var clip = _audioPlayer1.AudioClip;
+                _audioPlayer1.SetAudioClip(_audioPlayer2.AudioClip);
+                _audioPlayer2.SetAudioClip(clip);
+            }
         }
 
         private void OnEnable()

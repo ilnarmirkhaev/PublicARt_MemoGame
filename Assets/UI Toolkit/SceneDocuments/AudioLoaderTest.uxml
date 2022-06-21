@@ -13,9 +13,9 @@
                             <ui:VisualElement name="Icon" style="min-width: 24px; min-height: 24px; max-width: 36px; max-height: 36px; -unity-background-scale-mode: scale-to-fit;" />
                         </ui:Button>
                         <ui:Slider picking-mode="Ignore" value="25" high-value="100" class="audio-slider">
-                            <ui:VisualElement name="TimeStamps" style="flex-direction: row; justify-content: space-between; display: flex; align-items: center; margin-top: 6px;">
-                                <ui:Label text="0:49" display-tooltip-when-elided="true" class="timestamp-label" />
-                                <ui:Label text="2:31" display-tooltip-when-elided="true" class="timestamp-label" />
+                            <ui:VisualElement style="flex-direction: row; justify-content: space-between; display: flex; align-items: center; margin-top: 6px;">
+                                <ui:Label text="0:49" display-tooltip-when-elided="true" name="CurrentTime" class="timestamp-label" />
+                                <ui:Label text="2:31" display-tooltip-when-elided="true" name="TotalTime" class="timestamp-label" />
                             </ui:VisualElement>
                         </ui:Slider>
                     </ui:VisualElement>
@@ -30,9 +30,9 @@
                             <ui:VisualElement name="Icon" style="min-width: 24px; min-height: 24px; max-width: 36px; max-height: 36px; -unity-background-scale-mode: scale-to-fit;" />
                         </ui:Button>
                         <ui:Slider picking-mode="Ignore" value="25" high-value="100" class="audio-slider">
-                            <ui:VisualElement name="TimeStamps" style="flex-direction: row; justify-content: space-between; display: flex; align-items: center; margin-top: 6px;">
-                                <ui:Label text="0:49" display-tooltip-when-elided="true" class="timestamp-label" />
-                                <ui:Label text="2:31" display-tooltip-when-elided="true" class="timestamp-label" />
+                            <ui:VisualElement style="flex-direction: row; justify-content: space-between; display: flex; align-items: center; margin-top: 6px;">
+                                <ui:Label text="0:49" display-tooltip-when-elided="true" name="CurrentTime" class="timestamp-label" />
+                                <ui:Label text="2:31" display-tooltip-when-elided="true" name="TotalTime" class="timestamp-label" />
                             </ui:VisualElement>
                         </ui:Slider>
                     </ui:VisualElement>

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace AudioPlayerTemplate
@@ -48,6 +50,12 @@ namespace AudioPlayerTemplate
             
             yield return new WaitForSeconds(5);
             _audioPlayer2.SetAudioClip(clip2);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void OnEnable()

@@ -35,11 +35,13 @@ namespace AudioPlayerTemplate
                 if (_state == AudioPlayerState.LOADING)
                 {
                     _playButton.SetEnabled(false);
+                    _audioSlider.SetEnabled(false);
                     _tween = AnimateUI.AnimateRotation(_buttonIcon, 360, LoopType.Incremental, Ease.Linear);
                 }
                 else
                 {
                     _playButton.SetEnabled(true);
+                    _audioSlider.SetEnabled(true);
                     _tween?.Kill();
 
                     if (_state == AudioPlayerState.PLAYING)
@@ -55,8 +57,8 @@ namespace AudioPlayerTemplate
         }
 
         // UI Elements
-        private VisualElement _audioPlayerView;
-        private VisualElement _elementToClose;
+        private readonly VisualElement _audioPlayerView;
+        private readonly VisualElement _elementToClose;
 
         private Button _closeButton;
         private Button _playButton;
@@ -64,19 +66,26 @@ namespace AudioPlayerTemplate
         private VisualElement _buttonIcon;
 
         private Slider _audioSlider;
+        private VisualElement _dragContainer;
+        private Label _currentTime;
+        private Label _totalTime;
 
         // Styles
-        private string[] _iconStyles = { "icon-loading", "icon-pause", "icon-play" };
+        private readonly string[] _iconStyles = { "icon-loading", "icon-pause", "icon-play" };
         private const int Padding = 16;
 
         // Events
 
         public static event Action<AudioPlayer> OnAudioPlay;
         public static event Action<AudioPlayer> OnAudioPause;
+        public static event Action<AudioPlayer, float> OnSliderValueChanged;
+        public static event Action<AudioPlayer> OnSliderDragStarted;
+        public static event Action<AudioPlayer> OnSliderDragEnded;
 
         // Misc
         private Tweener _tween;
 
+        // Audio
         public AudioClip AudioClip;
         private bool _clipIsDownloaded;
 
@@ -92,6 +101,8 @@ namespace AudioPlayerTemplate
             // UI Elements
             InitUIElements();
             
+            SetDefaultAudioValues();
+            
             // Hide all elements
             SetPadding(0);
             _audioPlayerView.style.display = DisplayStyle.None;
@@ -104,31 +115,74 @@ namespace AudioPlayerTemplate
             State = AudioPlayerState.NONE;
         }
 
+        private void SetDefaultAudioValues()
+        {
+            _audioSlider.lowValue = 0;
+            _audioSlider.value = 0;
+            _audioSlider.highValue = 0;
+            
+            _currentTime.text = "0:00";
+            _totalTime.text = "0:00";
+        }
+
         private void InitUIElements()
         {
             _closeButton = _audioPlayerView.Q<Button>("CloseButton");
+            
             _playButton = _audioPlayerView.Q<Button>("PlayButton");
-            _audioSlider = _audioPlayerView.Q<Slider>();
-
             _buttonIcon = _playButton.Q<VisualElement>("Icon");
             
+            _audioSlider = _audioPlayerView.Q<Slider>();
+            _dragContainer = _audioSlider.Q<VisualElement>("unity-drag-container");
+            _currentTime = _audioSlider.Q<Label>("CurrentTime");
+            _totalTime = _audioSlider.Q<Label>("TotalTime");
+            
             View.Check(_closeButton);
+            
             View.Check(_playButton);
-            View.Check(_audioSlider);
             View.Check(_buttonIcon);
+            
+            View.Check(_audioSlider);
+            View.Check(_currentTime);
+            View.Check(_totalTime);
         }
 
         private void InitEventListeners()
         {
             _closeButton.clicked += Close;
             _playButton.clicked += ChangePlayState;
-            OnAudioPlay += (player) =>
+            
+            // Play only one AudioPlayer
+            OnAudioPlay += player =>
             {
                 if (player != this && State != AudioPlayerState.LOADING)
                 {
                     State = AudioPlayerState.PAUSED;
                 }
             };
+            
+            _audioSlider.RegisterValueChangedCallback(evt =>
+            {
+                OnSliderValueChanged?.Invoke(this, evt.newValue);
+            });
+            
+            _dragContainer.RegisterCallback<PointerMoveEvent>(_ =>
+            {
+                OnSliderDragStarted?.Invoke(this);
+                Debug.Log("Drag started");
+            });
+            
+            _dragContainer.RegisterCallback<PointerUpEvent>(_ =>
+            {
+                OnSliderDragEnded?.Invoke(this);
+                Debug.Log("Drag ended");
+            });
+        }
+
+        public void SetSliderValue(float value)
+        {
+            _audioSlider.SetValueWithoutNotify(value);
+            _currentTime.text = SecondsToTime((int)value);
         }
 
         // Logic
@@ -142,6 +196,7 @@ namespace AudioPlayerTemplate
         
         public async void Open()
         {
+            _audioSlider.value = 0;
             _elementToClose.style.display = DisplayStyle.None;
             _audioPlayerView.style.display = DisplayStyle.Flex;
 
@@ -172,6 +227,9 @@ namespace AudioPlayerTemplate
             _clipIsDownloaded = true;
             AudioClip = audioClip;
             
+            _audioSlider.highValue = AudioClip.length;
+            _totalTime.text = SecondsToTime((int)_audioSlider.highValue);
+            
             if (_audioPlayerView.style.display == DisplayStyle.Flex)
                 State = AudioPlayerState.PLAYING;
         }
@@ -184,6 +242,12 @@ namespace AudioPlayerTemplate
         private void Pause()
         {
             OnAudioPause?.Invoke(this);
+        }
+
+        public void Restart()
+        {
+            _audioSlider.value = 0;
+            State = AudioPlayerState.PAUSED;
         }
         
         // Styling methods
@@ -208,6 +272,18 @@ namespace AudioPlayerTemplate
             _closeButton.style.display = displayStyle;
             _playButton.style.display = displayStyle;
             _audioSlider.style.display = displayStyle;
+        }
+        
+        private static string SecondsToTime(int seconds)
+        {
+            var minutes = seconds / 60;
+
+            return $"{minutes}:{FormatSeconds(seconds % 60)}";
+        }
+
+        private static string FormatSeconds(int seconds)
+        {
+            return seconds < 10 ? "0" + seconds : seconds.ToString();
         }
     }
 }
